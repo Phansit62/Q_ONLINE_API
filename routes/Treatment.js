@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var help = require('../helper/Respon');
+var respon = require('../helper/Respon');
 var mssql = require('../helper/Connect');
 
-router.get('/getTreatment', async function (req, res, next) {
+router.get('/getTreatment', async function (req, res) {
   try {
     console.log('req :', req.query);
 
@@ -21,7 +21,7 @@ router.get('/getTreatment', async function (req, res, next) {
             query = query.filter((a) => a.treatment_type_name.includes(search));
           }
 
-          res.send(help.pagination(parseInt(pageSize), parseInt(currentPage), query));
+          res.send(respon.pagination(parseInt(pageSize), parseInt(currentPage), query));
         } else {
           res.send({ statusCode: 200, taskStatus: false, message: 'Unsuccess' });
         }
